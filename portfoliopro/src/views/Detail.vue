@@ -1,11 +1,13 @@
 <template>
   <section class="profile">
-    <img src="" alt="profile_img">
+    <img :src="profileImage.image_path" alt="profile_img">
     <p></p>
   </section>
   <section class="project">
-    <img src="" alt="profile_img">
-    <p></p>
+    <div class="project_inner" :key="i" v-for="(image, i) in projectImage">
+      <img :src="image.image_path" alt="profile_img">
+      <p></p>
+    </div>
   </section>
 </template>
 
