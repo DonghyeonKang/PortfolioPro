@@ -30,6 +30,7 @@
   border: 4px solid #AB5656;
   padding: 0.5rem;
   margin-bottom: 1rem;
+  cursor: pointer;
 }
 
 .side_button a {
