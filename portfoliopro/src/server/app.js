@@ -12,6 +12,10 @@ app.use(session({
     }
 }));
 
+app.use(express.json({  //detail 호출을 위한 설정
+    limit: '50mb'
+}))
+
 const server = app.listen(3000, () =>{
     console.log('Server started. port 3000.');
 });
@@ -42,7 +46,7 @@ app.post('/api/:alias', async (request, res) =>{
         return res.status(401).send({error:'You need to login.'});
     }
     try{
-        res.send(await req.db(request.params.alias));
+        res.send(await req.db(request.params.alias, request.body.param));   // request.body.param -> folio_id 를 파라미터로 받음 
     }
     catch(e){
         res.status(500).send({
