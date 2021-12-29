@@ -3,32 +3,35 @@ import Home from '../views/Home.vue'
 import Register from '../views/Register.vue'
 import Login from '../views/Login.vue'
 import Detail from '../views/Detail.vue'
-import Edit from '../views/DetailEdit.vue'
+import FindPw from '../views/FindPw.vue'
 
 const routes = [
   {
     path: '/',
     name: 'Home',
-    component: Home
+    component: Home,
+    meta: {
+      title: "main"
+    }
   },
   {
     path: '/login',
-    name: 'About',
+    name: 'Login',
     component: Login
   },
   {
     path: '/register',
-    name: 'About',
+    name: 'Register',
     component: Register
   },  {
     path: '/detail',
-    name: 'About',
+    name: 'Detail',
     component: Detail
   },
   {
-    path: '/detail-edit',
-    name: 'About',
-    component: Edit
+    path: '/findpw',
+    name: 'FindPw',
+    component: FindPw
   }
 ]
 
