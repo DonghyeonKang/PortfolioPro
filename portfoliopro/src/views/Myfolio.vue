@@ -1,5 +1,10 @@
 <template>
-
+  <div class="wrap">
+    <a @click="goToDetail(folio.folio_id)" :key="i" v-for="(folio, i) in folioList">
+      <img :src="folio.path" alt="folioImg">
+      <h3>{{folio.folio_name}}</h3>
+    </a>
+  </div>
 </template>
 
 <style scoped>
