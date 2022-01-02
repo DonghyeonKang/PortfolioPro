@@ -33,6 +33,6 @@ project_id int(10) NOT NULL,
 image_path text NOT NULL
 )
 
-ALTER TABLE `test`.`portfolios` ADD FOREIGN KEY (`user_id`) REFERENCES `test`.`users` (`id`);
-ALTER TABLE `test`.`projects` ADD FOREIGN KEY (`portfolio_id`) REFERENCES `test`.`portfolios` (`id`);
-ALTER TABLE `test`.`project_images` ADD FOREIGN KEY (`project_id`) REFERENCES `test`.`projects` (`id`);
+ALTER TABLE `dev`.`portfolios` ADD FOREIGN KEY (`user_id`) REFERENCES `dev`.`users` (`id`);
+ALTER TABLE `dev`.`projects` ADD FOREIGN KEY (`portfolio_id`) REFERENCES `dev`.`portfolios` (`id`);
+ALTER TABLE `dev`.`project_images` ADD FOREIGN KEY (`project_id`) REFERENCES `dev`.`projects` (`id`);
