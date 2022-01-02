@@ -1,42 +1,65 @@
 <template>
-  <section class="profile">
-    <img :src="profileImage.image_path" alt="profile_img">
-    <p></p>
-  </section>
-  <section class="project">
-    <div class="project_inner" :key="i" v-for="(image, i) in projectImage">
-      <img :src="image.image_path" alt="profile_img">
-      <p></p>
-    </div>
-  </section>
+  <div class="wrap">
+    <h2>Profile</h2>
+    <section class="profile">
+      <DetailBox></DetailBox>
+    </section>
+    <h2>Projects</h2>  
+    <section class="projects">
+      <DetailBox></DetailBox>
+      <div class="addProject" @click="addProject()">Add Project</div>
+    </section>
+  </div>
 </template>
 
+<style scoped>
+.wrap {
+  margin: 0 10%;
+  width: 80%;
+}
+
+.profile .box{
+  background: #ffd3d3;
+}
+
+.addProject {
+  cursor: pointer;
+}
+
+</style>
+
 <script>
+import DetailBox from '@/components/Detail_box.vue'
+
 export default {
+  name: 'Detail',
+  components: {
+    DetailBox
+  },
   data() {
     return {
       folioId: 0,
-      folioDetail: [],  // 데이터 정의해서
-      profileImage: [],
-      projectImage: []
-    }
+      folioDetail: []
+    };
   },
-  created() { // vue 컴포넌트가 create 되는 시점 
+  created() {
+    // vue 컴포넌트가 create 되는 시점
     this.folio_id = this.$route.query.folio_id;
     this.getProjectDetail();
-    this.getProfileImage();
-    this.getProjectImage();
   },
   methods: {
-    async getProjectDetail() {   // get data
-      this.folioList = await this.$api("/api/ProjectDetail", {param: [this.folio_id]})  //데이터 넣음
+    async getProjectDetail() {
+      // get data
+      this.folioList = await this.$api("/api/ProjectDetail", {
+        param: [this.folio_id],
+      }); //데이터 넣음
     },
-    async getProfileImage() {   // ProfileImage
-      this.folioImage = await this.$api("/api/ProfileImage", {param:[this.folio_id]})  //데이터 넣음
+    updateImg(imgType) {
+      imgType
     },
-    async getProjectImage() {   // ProjectImage
-      this.folioImage = await this.$api("/api/ProjectImage", {param:[this.folio_id]})  //데이터 넣음
+    addProject() {
+      this.folioDetail.push();
     }
-  }
-}
+  },
+};
 </script>

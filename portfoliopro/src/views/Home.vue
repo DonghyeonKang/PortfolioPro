@@ -1,25 +1,25 @@
 <template>
   <div class="wrap">
-    <a @click="goToDetail(folio.folio_id)" :key="i" v-for="(folio, i) in folioList">
+    <div class="folio_box" @click="goToDetail(folio.folio_id)" :key="i" v-for="(folio, i) in folioList">
       <img :src="folio.path" alt="folioImg">
       <h3>{{folio.folio_name}}</h3>
-    </a>
+    </div>
   </div>
 </template>
 
 <style scoped>
-.folio_list {
-    max-width: 15rem;
+.folio_box {
+    max-width: 10rem;
     width: 100%;
     min-width: 2rem;
     height: 15rem;
-    background: #AB5656;
+    background: #ffd3d3;
     margin: 0 2rem 0 2rem;
 }
 
-.folio_img {
-    width: 100%;
-    height: 80%;
+.folio_box img {
+  width: 95%;
+  margin-top: 1rem;
 }
 
 .wrap a {
