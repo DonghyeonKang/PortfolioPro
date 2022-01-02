@@ -4,7 +4,7 @@
     <section class="profile">
       <DetailBox></DetailBox>
     </section>
-    <h2>Projects</h2>  
+    <h2>Projects</h2>
     <section class="projects">
       <DetailBox></DetailBox>
       <div class="addProject" @click="addProject()">Add Project</div>
@@ -18,45 +18,58 @@
   width: 80%;
 }
 
-.profile .box{
+.profile .box {
   background: #ffd3d3;
 }
 
 .addProject {
   cursor: pointer;
 }
-
 </style>
 
 <script>
-import DetailBox from '@/components/Detail_box.vue'
+import DetailBox from "@/components/Detail_box.vue";
 
 export default {
-  name: 'Detail',
+  name: "Detail",
   components: {
-    DetailBox
+    DetailBox,
   },
   data() {
     return {
-      folioId: 0,
-      folioDetail: []
+      folio_name: []
     };
   },
   created() {
     // vue 컴포넌트가 create 되는 시점
-    this.folio_id = this.$route.query.folio_id;
+    this.folio_name = this.$route.query.folio_name;
     this.getProjectDetail();
   },
   methods: {
+    // get data
     async getProjectDetail() {
-      // get data
-      this.folioList = await this.$api("/api/ProjectDetail", {
-        param: [this.folio_id],
-      }); //데이터 넣음
+      this.folioDetail = await this.$api("/api/ProjectDetail", {
+        param: [this.folio_name]
+      });
     },
-    updateImg(imgType) {
-      imgType
+    //profile
+    async updatePortfolio() {
+      await this.$api("/api/updatePortfolio", {
+        param: [1,1,1] // img content portfolios.id
+      });
     },
+    // project
+    async updatePreject() {
+      await this.$api("/api/updatePreject", {
+        param: [1, 2] // content, projects.id
+      });
+    },
+    async updateProjectImg() {
+      await this.$api("/api/updateProjectImg", {
+        param: [1, 1] // project_id, image_path
+      });
+    },
+    // add project
     addProject() {
       this.folioDetail.push();
     }
