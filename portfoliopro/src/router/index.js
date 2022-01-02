@@ -4,6 +4,7 @@ import Register from '../views/Register.vue'
 import Login from '../views/Login.vue'
 import Detail from '../views/Detail.vue'
 import FindPw from '../views/FindPw.vue'
+import Myfolio from '../views/Myfolio.vue'
 
 const routes = [
   {
@@ -33,6 +34,11 @@ const routes = [
     path: '/findpw',
     name: 'FindPw',
     component: FindPw
+  },
+  {
+    path: '/myfolio',
+    name: 'Myfolio',
+    component: Myfolio
   }
 ]
 

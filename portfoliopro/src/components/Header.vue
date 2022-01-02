@@ -3,7 +3,7 @@
     <router-link to="/" class="logo">PortFolio Pro</router-link>
     <router-link
       v-if="sessionCheck()"
-      to="/Myfolio"
+      to="/myfolio"
       class="login"
       @click="goToMyfolio(user.user_id)"
       >profile</router-link
@@ -46,7 +46,7 @@ export default {
       return true;
     },
     goToMyfolio(user_id) {
-        this.$router.push({path:'/detail', query:{user_id:user_id}})
+        this.$router.push({path:'/myfolio', query:{user_id:user_id}})
     },
   },
 };

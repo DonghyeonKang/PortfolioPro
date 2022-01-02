@@ -13,7 +13,7 @@
     width: 100%;
     min-width: 2rem;
     height: 15rem;
-    background: #AB5656;
+    background: #ffd3d3;
     margin: 0 2rem 0 2rem;
 }
 
