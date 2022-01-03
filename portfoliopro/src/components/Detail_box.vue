@@ -6,9 +6,7 @@
       style="cursor: pointer"
     />
     <input class="fileSelect" type="file" name="file" accept="image/*" />
-    <textarea name="text" id="text"></textarea>
-    <div class="edit" v-if="editMode" @click="updateData()">Update</div>
-    <div class="edit" v-else @click="turnEdit()">Edit</div>
+    <textarea name="text" id="text" v-model="content"></textarea>
   </div>
   <div class="box" v-else>
     <img
@@ -16,14 +14,11 @@
       alt="profile_img"
     />
     <p>
-      Lorem ipsum, dolor sit amet consectetur adipisicing elit. Labore
-      dignissimos distinctio minus aut corrupti ex hic rerum voluptates,
-      voluptatibus ullam nesciunt quia in? Iste commodi blanditiis aliquid ea
-      cum voluptates?
+      {{ content }}
     </p>
-    <div class="edit" v-if="editMode" @click="updateData()">Update</div>
-    <div class="edit" v-else @click="turnEdit()">Edit</div>
   </div>
+  <div class="edit" v-if="editMode" @click="updateProject()">Update</div>
+  <div class="edit" v-else @click="turnEdit()">Edit</div>
 </template>
 
 <style scoped>
@@ -33,12 +28,16 @@ img {
 
 .edit {
   cursor: pointer;
+  position: absolute;
+  right: 4px;
+  top: 4px;
 }
 
 .box {
   display: flex;
   background: #f0f0f0;
   margin-bottom: 1rem;
+  width: 100%;
 }
 
 .box img {
@@ -46,23 +45,31 @@ img {
 }
 
 .fileSelect {
-    position: absolute;
-    width: 10rem;
-    height: 20rem;
+  position: absolute;
+  width: 10rem;
+  height: 20rem;
 }
 
 #text {
-    width: 100%;
-    resize: none;
+  width: 100%;
+  resize: none;
+  border: 4px solid #1a1a1a;
+  padding: 1rem;
 }
 </style>
 
 <script>
 export default {
+  props: {
+    message: String,
+    pj_id: Number
+  },
   data() {
     return {
-      folioId: 0,
+      folioDetail: [],
       editMode: false,
+      content: this.message,
+      project_id: this.pj_id
     };
   },
   created() {
@@ -73,10 +80,23 @@ export default {
       if (this.editMode) this.editMode = false;
       else this.editMode = true;
     },
-    updateData() {
-      //업데이트 추가해야함
-
+    //profile
+    async updatePortfolio() {
+      await this.$api("/api/updatePortfolio", {
+        param: [1, 1, 1], // img content portfolios.id
+      });
+    },
+    // project
+    async updateProject() {
+      await this.$api("/api/updateProject", {
+        param: [this.content, this.project_id], // Project content, projects.id
+      });
       this.turnEdit();
+    },
+    async updateProjectImg() {
+      await this.$api("/api/updateProjectImg", {
+        param: [1, 1], // project_id, image_path
+      });
     },
   },
 };

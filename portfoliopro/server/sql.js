@@ -23,7 +23,7 @@ module.exports = {
         query: `INSERT INTO \`portfolios\` (\`user_id\`, \`portfolio_name\`, \`portfolio_content\`, \`portfolio_image_path\`) VALUES
         (?, ?, ?, ?);`
     },
-    insertPreject: { 
+    insertProject: { 
         query: `INSERT INTO \`projects\` (\`portfolio_id\`, \`project_name\`, \`project_content\`) VALUES
         (?, ?, ?);`
     },
@@ -37,7 +37,7 @@ module.exports = {
         SET portfolio_image_path = ?, portfolio_content = ?
         WHERE id=?`
     },
-    updatePreject: { 
+    updateProject: { 
         query: `UPDATE projects
         SET project_content = ?
         WHERE id=?`

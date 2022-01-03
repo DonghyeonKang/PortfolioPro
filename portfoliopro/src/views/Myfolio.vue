@@ -39,6 +39,10 @@ export default {
     return {
       userFolioList: [], // 데이터 정의해서
       result: 0,
+      portfolio_name: "",
+      user_id: 0,
+      portfolio_content: "",
+      portfolio_image_path: ""
     };
   },
   created() {
@@ -50,8 +54,8 @@ export default {
       // get data
       this.userFolioList = await this.$api("/api/userFolioList", {}); //데이터 넣음
     },
-    goToDetail(folio_id) {
-      this.$router.push({ path: "/detail", query: { folio_id: folio_id } });
+    goToDetail(folio_name) {
+      this.$router.push({ path: "/detail", query: { folio_name: folio_name } });
     },
     async addFolio() {
       this.result = await this.$api("/api/insertPortfolio", { param: [1, 2, 3, 4] }); //\`user_id\`, \`portfolio_name\`, \`portfolio_content\`, \`portfolio_image_path\`

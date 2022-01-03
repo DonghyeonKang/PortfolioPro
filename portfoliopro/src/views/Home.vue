@@ -13,6 +13,7 @@
   justify-content: center;
   min-width: 50rem;
   overflow: auto;
+  margin-bottom: 10rem;
 }
 .folio_box {
     max-width: 10rem;
@@ -45,10 +46,10 @@ export default {
   },
   methods: {
     async getFolioList() {   // get data
-      this.folioList = await this.$api("/api/folioList", {})  //데이터 넣음
+      this.folioList = await this.$api("/api/folioList", {});  //데이터 넣음
     },
     goToDetail(folio_name) {
-      this.$router.push({path:'/detail', query:{folio_name:folio_name}})
+      this.$router.push({path:'/detail', query:{folio_name:folio_name}});
     }
   }
 }
