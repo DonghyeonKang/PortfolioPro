@@ -2,19 +2,19 @@
   <div class="inner" v-if="editMode">
     <img
       @click="goToDetail(folio.folio_id)"
-      src="https://w.namu.la/s/48a178fbd427b8dddc275cf878725e03d8499105f13e57c7ff889ef1cba3895d813b88696242cebb4f56d28ae2c93fbdef1f61731db76fc27f9070a8fceef4652016fbd8c0a144273d70a69c7dfff6d9"
+      :src="portfolio_image"
       alt="folioImg"
     />
-    <textarea name="text" id="text"></textarea>
+    <textarea name="text" id="text" v-bind="portfolio_name"></textarea>
     <div class="edit" v-if="editMode" @click="updateData()">Update</div>
     <div class="edit" v-else @click="turnEdit()">Edit</div>
   </div>
   <div class="inner" v-else>
     <img
-      src="https://w.namu.la/s/48a178fbd427b8dddc275cf878725e03d8499105f13e57c7ff889ef1cba3895d813b88696242cebb4f56d28ae2c93fbdef1f61731db76fc27f9070a8fceef4652016fbd8c0a144273d70a69c7dfff6d9"
+      :src="portfolio_image"
       alt="folioImg"
     />
-    <h3>어쩔 티비</h3>
+    <h3>{{ portfolio_name }}</h3>
     <div class="edit" v-if="editMode" @click="updateData()">Update</div>
     <div class="edit" v-else @click="turnEdit()">Edit</div>
   </div>
@@ -43,20 +43,22 @@
 </style>
 <script>
 export default {
+  props: {
+    folio_image: String,
+    folio_name: String,
+    folio_content: String,
+    id: Number
+  },
   data() {
     return {
       editMode: false,
+      portfolio_image: this.folio_image,
+      portfolio_name: this.folio_name,
+      portfolio_content: this.folio_content,
+      portfolio_id: this.id
     };
   },
-  created() {
-    // vue 컴포넌트가 create 되는 시점
-    this.getFolioList();
-  },
   methods: {
-    async getFolioList() {
-      // get data
-      this.folioList = await this.$api("/api/folioList", {}); //데이터 넣음
-    },
     goToDetail(folio_id) {
       this.$router.push({ path: "/detail", query: { folio_id: folio_id } });
     },
@@ -64,6 +66,9 @@ export default {
       if (this.editMode) this.editMode = false;
       else this.editMode = true;
     },
-  },
+    async updatePortfolio() {
+      this.result = await this.$api("/api/updatePortfolio", { param: [this.portfolio_image, this.portfolio_content, this.portfolio_id]}); // portfolio_image_path, portfolio_content id, id
+    }
+  }
 };
 </script>

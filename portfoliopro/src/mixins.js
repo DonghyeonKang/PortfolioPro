@@ -3,6 +3,7 @@ import axios from 'axios';
 export default {    // 어떤 컴포넌트에서도 사용할 수 있도록 공통 모듈 작성
     methods: {
         async $api(url, data) {
+            console.log(data);
             return (await axios({
                 method: 'post',
                 url,

@@ -6,16 +6,23 @@
     </section>
     <h2>Projects</h2>
     <section class="projects">
-      <DetailBox></DetailBox>
+      <div class="project" :key="i" v-for="(project, i) in folioDetail">
+        <DetailBox :message="project.project_content" :pj_id="project.id"></DetailBox>
+      </div>
       <div class="addProject" @click="addProject()">Add Project</div>
     </section>
   </div>
 </template>
 
 <style scoped>
+#app {
+  position: relative;
+}
+
 .wrap {
   margin: 0 10%;
   width: 80%;
+  margin-bottom: 30rem;
 }
 
 .profile .box {
@@ -25,6 +32,16 @@
 .addProject {
   cursor: pointer;
 }
+
+.profile {
+  display: flex;
+  position: relative;
+}
+
+.project {
+  display: flex;
+  position: relative;
+}
 </style>
 
 <script>
@@ -33,11 +50,13 @@ import DetailBox from "@/components/Detail_box.vue";
 export default {
   name: "Detail",
   components: {
-    DetailBox,
+    DetailBox
   },
   data() {
     return {
-      folio_name: []
+      folio_name: [],
+      folioDetail: [],
+      message: ""
     };
   },
   created() {
@@ -49,30 +68,14 @@ export default {
     // get data
     async getProjectDetail() {
       this.folioDetail = await this.$api("/api/ProjectDetail", {
-        param: [this.folio_name]
+        param: [this.folio_name],
       });
-    },
-    //profile
-    async updatePortfolio() {
-      await this.$api("/api/updatePortfolio", {
-        param: [1,1,1] // img content portfolios.id
-      });
-    },
-    // project
-    async updatePreject() {
-      await this.$api("/api/updatePreject", {
-        param: [1, 2] // content, projects.id
-      });
-    },
-    async updateProjectImg() {
-      await this.$api("/api/updateProjectImg", {
-        param: [1, 1] // project_id, image_path
-      });
+      console.log(this.folioDetail);
     },
     // add project
     addProject() {
       this.folioDetail.push();
-    }
+    },
   },
 };
 </script>

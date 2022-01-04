@@ -5,12 +5,12 @@ module.exports = {
         LIMIT 12`
     },
     ProjectDetail: {
-        query: `SELECT u.user_image_path, u.user_profile_content, pf.portfolio_image_path, pf.portfolio_content, i.*, pj.project_content 
+        query: `SELECT DISTINCT u.user_image_path, u.user_profile_content, pf.portfolio_image_path, pf.portfolio_content, i.*, pj.project_content 
         FROM users u, portfolios pf, projects pj, project_images i 
         WHERE pf.user_id = u.id AND pf.portfolio_name = ? AND pj.portfolio_id = pf.id AND i.project_id = pj.id`
     },
     userFolioList: {
-        query: `SELECT pf.portfolio_name, pf.portfolio_image_path 
+        query: `SELECT pf.portfolio_name, pf.portfolio_image_path, pf.id 
         FROM users u, portfolios pf
         WHERE pf.user_id = u.id AND u.id = ?
         LIMIT 12`
@@ -23,7 +23,7 @@ module.exports = {
         query: `INSERT INTO \`portfolios\` (\`user_id\`, \`portfolio_name\`, \`portfolio_content\`, \`portfolio_image_path\`) VALUES
         (?, ?, ?, ?);`
     },
-    insertPreject: { 
+    insertProject: { 
         query: `INSERT INTO \`projects\` (\`portfolio_id\`, \`project_name\`, \`project_content\`) VALUES
         (?, ?, ?);`
     },
@@ -37,7 +37,7 @@ module.exports = {
         SET portfolio_image_path = ?, portfolio_content = ?
         WHERE id=?`
     },
-    updatePreject: { 
+    updateProject: { 
         query: `UPDATE projects
         SET project_content = ?
         WHERE id=?`
