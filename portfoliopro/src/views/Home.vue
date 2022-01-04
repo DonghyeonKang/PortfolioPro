@@ -10,18 +10,18 @@
 <style scoped>
 .wrap {
   display: flex;
-  justify-content: center;
-  min-width: 50rem;
+  width: 90%;
   overflow: auto;
-  margin-bottom: 10rem;
+  margin: 0 5% 30rem 5%;
+  flex-flow: wrap;
+  justify-content: space-evenly;
 }
 .folio_box {
+    min-width: 10rem;
     max-width: 10rem;
-    width: 100%;
-    min-width: 2rem;
     height: 15rem;
     background: #ffd3d3;
-    margin: 0 2rem 0 2rem;
+    margin: 0 1rem 2rem 1rem;
 }
 
 .folio_box img {

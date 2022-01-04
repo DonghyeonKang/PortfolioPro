@@ -15,10 +15,14 @@
 </template>
 
 <style scoped>
+#app {
+  position: relative;
+}
+
 .wrap {
   margin: 0 10%;
   width: 80%;
-  margin-bottom: 10rem;
+  margin-bottom: 30rem;
 }
 
 .profile .box {
