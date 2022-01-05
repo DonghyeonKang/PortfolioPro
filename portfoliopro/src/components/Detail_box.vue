@@ -1,20 +1,20 @@
 <template>
   <div class="box" v-if="editMode">
     <img
-      src="https://w.namu.la/s/48a178fbd427b8dddc275cf878725e03d8499105f13e57c7ff889ef1cba3895d813b88696242cebb4f56d28ae2c93fbdef1f61731db76fc27f9070a8fceef4652016fbd8c0a144273d70a69c7dfff6d9"
+      src="https://www.touchtaiwan.com/images/default.jpg"
       alt="profile_img"
       style="cursor: pointer"
     />
     <input class="fileSelect" type="file" name="file" accept="image/*" />
-    <textarea name="text" id="text" v-model="content"></textarea>
+    <textarea name="text" id="text" v-model="project_content"></textarea>
   </div>
   <div class="box" v-else>
     <img
-      src="https://w.namu.la/s/48a178fbd427b8dddc275cf878725e03d8499105f13e57c7ff889ef1cba3895d813b88696242cebb4f56d28ae2c93fbdef1f61731db76fc27f9070a8fceef4652016fbd8c0a144273d70a69c7dfff6d9"
+      src="https://www.touchtaiwan.com/images/default.jpg"
       alt="profile_img"
     />
     <p>
-      {{ content }}
+      {{ project_content }}
     </p>
   </div>
   <div class="edit" v-if="editMode" @click="updateProject()">Update</div>
@@ -61,19 +61,24 @@ img {
 <script>
 export default {
   props: {
-    message: String,
-    pj_id: Number
+    pj_content: String,
+    pj_id: Number,
+    pj_img: String,
+    user_img: String
   },
   data() {
     return {
       folioDetail: [],
       editMode: false,
-      content: this.message,
-      project_id: this.pj_id
+      project_content: this.pj_content,
+      project_id: this.pj_id,
+      project_image: this.pj_img,
+      user_image: this.user_img
     };
   },
   created() {
     // vue 컴포넌트가 create 되는 시점
+    console.log("부모에게 받은 pj_img = " + this.pj_img);
   },
   methods: {
     turnEdit() {
@@ -88,15 +93,11 @@ export default {
     },
     // project
     async updateProject() {
+      console.log("부모에게 받은 id = " + this.pj_id);
       await this.$api("/api/updateProject", {
-        param: [this.content, this.project_id], // Project content, projects.id
+        param: [this.project_content, this.project_id] // Project content, projects.id
       });
       this.turnEdit();
-    },
-    async updateProjectImg() {
-      await this.$api("/api/updateProjectImg", {
-        param: [1, 1], // project_id, image_path
-      });
     },
   },
 };

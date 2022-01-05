@@ -51,7 +51,7 @@ export default {
       portfolio_name: "portfolio",
       user_id: 1,
       portfolio_content: "",
-      portfolio_image_path: "",
+      portfolio_image_path: "https://www.touchtaiwan.com/images/default.jpg",
       message: ""
     };
   },
