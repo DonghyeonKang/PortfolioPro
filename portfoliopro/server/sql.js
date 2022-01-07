@@ -34,7 +34,7 @@ module.exports = {
     },
     updatePortfolio: { 
         query: `UPDATE portfolios
-        SET portfolio_image_path = ?, portfolio_content = ?
+        SET portfolio_image_path = ?, portfolio_name = ?
         WHERE id=?`
     },
     updateProject: { 
