@@ -4,10 +4,10 @@ module.exports = {
         FROM portfolios pf
         LIMIT 12`
     },
-    ProjectDetail: {
-        query: `SELECT DISTINCT u.user_image_path, u.user_profile_content, pf.portfolio_image_path, pf.portfolio_content, i.*, pj.project_content 
-        FROM users u, portfolios pf, projects pj, project_images i 
-        WHERE pf.user_id = u.id AND pf.portfolio_name = ? AND pj.portfolio_id = pf.id AND i.project_id = pj.id`
+    FolioDetail: {
+        query: `SELECT u.user_image_path, u.user_profile_content, pf.portfolio_image_path, pf.portfolio_content, pj.id, pj.portfolio_id, pj.project_image_path_1, pj.project_image_path_2, pj.project_image_path_3, pj.project_image_path_4, pj.project_content 
+        FROM users u, portfolios pf, projects pj
+        WHERE pf.user_id = u.id AND pf.portfolio_name = ? AND pj.portfolio_id = pf.id`
     },
     userFolioList: {
         query: `SELECT pf.portfolio_name, pf.portfolio_image_path, pf.id 
@@ -24,8 +24,8 @@ module.exports = {
         (?, ?, ?, ?);`
     },
     insertProject: { 
-        query: `INSERT INTO \`projects\` (\`portfolio_id\`, \`project_name\`, \`project_content\`) VALUES
-        (?, ?, ?);`
+        query: `INSERT INTO \`projects\` (\`portfolio_id\`, \`project_name\`, \`project_content\`, \`project_image_path_1\`) VALUES
+        (?, ?, ?, ?);`
     },
     updateProfile: {
         query: `UPDATE users
@@ -34,16 +34,12 @@ module.exports = {
     },
     updatePortfolio: { 
         query: `UPDATE portfolios
-        SET portfolio_image_path = ?, portfolio_content = ?
+        SET portfolio_image_path = ?, portfolio_name = ?
         WHERE id=?`
     },
     updateProject: { 
         query: `UPDATE projects
         SET project_content = ?
         WHERE id=?`
-    },
-    updateProjectImg: {
-        query: `INSERT INTO project_images(project_id, image_path)
-        VALUES(?, ?);`
     }
 }

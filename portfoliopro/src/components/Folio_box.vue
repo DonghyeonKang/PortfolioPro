@@ -5,28 +5,21 @@
       :src="portfolio_image"
       alt="folioImg"
     />
-    <textarea name="text" id="text" v-bind="portfolio_name"></textarea>
-    <div class="edit" v-if="editMode" @click="updateData()">Update</div>
-    <div class="edit" v-else @click="turnEdit()">Edit</div>
+    <textarea name="text" id="text" v-model="portfolio_name"></textarea>
+    <div class="edit" @click="updatePortfolio()">Update</div>
   </div>
   <div class="inner" v-else>
-    <img
-      :src="portfolio_image"
-      alt="folioImg"
-    />
+    <img :src="portfolio_image" alt="folioImg" />
     <h3>{{ portfolio_name }}</h3>
-    <div class="edit" v-if="editMode" @click="updateData()">Update</div>
-    <div class="edit" v-else @click="turnEdit()">Edit</div>
+    <div class="edit" @click="turnEdit()">Edit</div>
   </div>
 </template>
 <style scoped>
 .folio_box {
+  min-width: 10rem;
   max-width: 10rem;
-  width: 100%;
-  min-width: 2rem;
-  height: 15rem;
   background: #ffd3d3;
-  margin: 0 2rem 0 2rem;
+  margin: 0 1rem 2rem 1rem;
 }
 
 .folio_box img {
@@ -34,11 +27,15 @@
   margin-top: 1rem;
 }
 
+.inner h3 {
+  word-break: break-all;
+}
+
 .edit {
   cursor: pointer;
 }
 #text {
-    resize: none;
+  resize: none;
 }
 </style>
 <script>
@@ -47,7 +44,7 @@ export default {
     folio_image: String,
     folio_name: String,
     folio_content: String,
-    id: Number
+    folio_id: Number,
   },
   data() {
     return {
@@ -55,7 +52,7 @@ export default {
       portfolio_image: this.folio_image,
       portfolio_name: this.folio_name,
       portfolio_content: this.folio_content,
-      portfolio_id: this.id
+      portfolio_id: this.folio_id,
     };
   },
   methods: {
@@ -67,7 +64,14 @@ export default {
       else this.editMode = true;
     },
     async updatePortfolio() {
-      this.result = await this.$api("/api/updatePortfolio", { param: [this.portfolio_image, this.portfolio_content, this.portfolio_id]}); // portfolio_image_path, portfolio_content id, id
+      this.result = await this.$api("/api/updatePortfolio", {
+        param: [
+          this.portfolio_image,
+          this.portfolio_name,
+          this.portfolio_id
+        ]
+      }); // portfolio_image_path, portfolio_content id, id
+      this.turnEdit();
     }
   }
 };

@@ -16,10 +16,10 @@
   flex-flow: wrap;
   justify-content: space-evenly;
 }
+
 .folio_box {
     min-width: 10rem;
     max-width: 10rem;
-    height: 15rem;
     background: #ffd3d3;
     margin: 0 1rem 2rem 1rem;
 }

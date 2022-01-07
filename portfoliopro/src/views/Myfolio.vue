@@ -14,16 +14,18 @@
 
 .wrap {
   display: flex;
-  margin-bottom: 30rem;
-  flex-flow: wrap
+  width: 90%;
+  overflow: auto;
+  margin: 0 5% 30rem 5%;
+  flex-flow: wrap;
+  justify-content: space-evenly;
 }
+
 .folio_box {
-  max-width: 10rem;
-  width: 100%;
-  min-width: 2rem;
-  height: 15rem;
-  background: #ffd3d3;
-  margin: 0 2rem 2rem 2rem;
+    min-width: 10rem;
+    max-width: 10rem;
+    background: #ffd3d3;
+    margin: 0 1rem 2rem 1rem;
 }
 
 .folio_box img {
@@ -51,7 +53,7 @@ export default {
       portfolio_name: "portfolio",
       user_id: 1,
       portfolio_content: "",
-      portfolio_image_path: "",
+      portfolio_image_path: "https://www.touchtaiwan.com/images/default.jpg",
       message: ""
     };
   },
@@ -70,6 +72,7 @@ export default {
     },
     async insertFolio() {
       this.result = await this.$api("/api/insertPortfolio", { param: [this.user_id, this.portfolio_name, this.portfolio_content, this.portfolio_image_path] }); //\`user_id\`, \`portfolio_name\`, \`portfolio_content\`, \`portfolio_image_path\`
+      this.getFolioList();
     }
   }
 };
