@@ -4,7 +4,7 @@ module.exports = {
         FROM portfolios pf
         LIMIT 12`
     },
-    ProjectDetail: {
+    FolioDetail: {
         query: `SELECT u.user_image_path, u.user_profile_content, pf.portfolio_image_path, pf.portfolio_content, pj.id, pj.portfolio_id, pj.project_image_path_1, pj.project_image_path_2, pj.project_image_path_3, pj.project_image_path_4, pj.project_content 
         FROM users u, portfolios pf, projects pj
         WHERE pf.user_id = u.id AND pf.portfolio_name = ? AND pj.portfolio_id = pf.id`
